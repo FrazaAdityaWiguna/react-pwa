@@ -1,0 +1,11 @@
+.navbar-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px
+}
+
+.navbar-nav a:hover {
+  color: #cccccc;
+  transition: all .2s ease;
+}
+

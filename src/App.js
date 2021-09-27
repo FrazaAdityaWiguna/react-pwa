@@ -1,20 +1,27 @@
-import logo from './logo.svg';
+import React, { lazy, Suspense } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Header from './components/Header';
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Users = lazy(() => import('./pages/Users'));
 
 function App() {
   return (
-    <Navbar bg='primary' variant='dark'>
-      <Container>
-        <Navbar.Brand href='#home'>Navbar</Navbar.Brand>
-        <Nav className='me-auto'>
-          <Nav.Link href='#home'>Home</Nav.Link>
-          <Nav.Link href='#features'>Features</Nav.Link>
-          <Nav.Link href='#pricing'>Pricing</Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+    <>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={About} />
+            <Route path='/users' component={Users} />
+          </Switch>
+        </Suspense>
+      </Router>
+    </>
   );
 }
 
