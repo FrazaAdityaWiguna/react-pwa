@@ -7,6 +7,8 @@ this.addEventListener('install', (event) => {
         '/static/js/bundle.js',
         '/static/js/main.chunk.js',
         '/static/js/1.chunk.js',
+        '/static/js/2.chunk.js',
+        '/static/js/3.chunk.js',
         '/static/js/vendors~main.chunk.js',
         '/favicon.ico',
         '/manifest.json',
@@ -20,13 +22,15 @@ this.addEventListener('install', (event) => {
   );
 });
 
-// menjalankan fungsi sw
+// menjalankan fungsi sw (akan memunculkan opsi install)
 this.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((resp) => {
-      if (resp) {
-        return resp;
-      }
-    })
-  );
+  if (!navigator.onLine) {
+    event.respondWith(
+      caches.match(event.request).then((resp) => {
+        if (resp) {
+          return resp;
+        }
+      })
+    );
+  }
 });
