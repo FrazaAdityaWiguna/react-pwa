@@ -6,6 +6,7 @@ this.addEventListener('install', (event) => {
       cache.addAll([
         '/static/js/bundle.js',
         '/static/js/main.chunk.js',
+        '/static/js/0.chunk.js',
         '/static/js/1.chunk.js',
         '/static/js/2.chunk.js',
         '/static/js/3.chunk.js',
@@ -30,6 +31,8 @@ this.addEventListener('fetch', (event) => {
         if (resp) {
           return resp;
         }
+        let requestUrl = event.request.clone();
+        fetch(requestUrl);
       })
     );
   }
